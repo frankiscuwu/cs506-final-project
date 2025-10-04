@@ -17,7 +17,7 @@ from keras.preprocessing.image import ImageDataGenerator
 # ----------------------------------------------------
 RAW_DATA_DIR = "data/raw/ALL"        # Original dataset path
 OUTPUT_DIR = "data/processed"        # Output path for train/val/test
-SEED = 42                            # Random seed
+SEED = 123                           # Random seed
 SPLITS = (0.7, 0.15, 0.15)           # Train/val/test ratios
 
 # ----------------------------------------------------
