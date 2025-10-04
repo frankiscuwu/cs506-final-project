@@ -12,9 +12,9 @@ We collected the data from [Obuli Sai Naren's Multi Cancer Dataset on Kaggle](ht
 
 Our plan will be to utilize a subset of the total dataset in training, before testing it with a separate subset proportional to ALL distribution in real life, with a separate subset of images for validation in cross-validating.
 
-- Training: 60% (3,000 images)
-- Validation: 20% (1,000 images) 
-- Testing: 20% (1,000 images)
+- Training: 70% (3,500 images/class)
+- Validation: 15% (750 images/class) 
+- Testing: 15% (750 images/class)
 
 ## Model
 
