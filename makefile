@@ -1,24 +1,26 @@
 # Variables
 PYTHON = python3
 PIP = pip3
-APP = main.py
+# APP = main.py
 VENV = venv
 
 # Default target
-all: run
+all: install
 
 # Create virtual environment
 $(VENV)/bin/activate:
 	$(PYTHON) -m venv $(VENV)
 	. $(VENV)/bin/activate; $(PIP) install --upgrade pip
 
-# Install dependencies
+# Run installation and download
 install: $(VENV)/bin/activate requirements.txt
 	. $(VENV)/bin/activate; $(PIP) install -r requirements.txt
+	# Set Kagglehub cache and run the download script
+	. $(VENV)/bin/activate; KAGGLEHUB_CACHE=data/raw/ALL python src/download_dataset.py
 
 # Run the app
-run:
-	$(PYTHON) $(APP)
+# run:
+# 	$(PYTHON) $(APP)
 
 # Run tests
 test:
