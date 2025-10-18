@@ -1,8 +1,8 @@
 # Variables
-PYTHON = python3
-PIP = pip3
-# APP = main.py
+PYTHON = /usr/local/bin/python3.12
+PIP = $(PYTHON) -m pip
 VENV = venv
+# APP = main.py
 
 # Default target
 all: install
