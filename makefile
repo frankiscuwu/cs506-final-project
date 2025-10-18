@@ -1,42 +1,35 @@
 # Variables
-PYTHON = python3
-PIP = pip3
-# APP = main.py
+PYTHON ?= python3
 VENV = venv
 
 # Default target
 all: install
 
 # Create virtual environment
-$(VENV)/bin/activate:
+$(VENV)/bin/python:
 	$(PYTHON) -m venv $(VENV)
-	. $(VENV)/bin/activate; $(PIP) install --upgrade pip
+	$(VENV)/bin/python -m pip install --upgrade pip
 
-# Run installation and download
-install: $(VENV)/bin/activate requirements.txt
-	. $(VENV)/bin/activate; $(PIP) install -r requirements.txt
-	# Set Kagglehub cache and run the download script
-	. $(VENV)/bin/activate; KAGGLEHUB_CACHE=data/raw/ALL python src/download_dataset.py
-
-# Run the app
-# run:
-# 	$(PYTHON) $(APP)
+# Install dependencies and download dataset
+install: $(VENV)/bin/python requirements.txt
+	$(VENV)/bin/python -m pip install -r requirements.txt
+	KAGGLEHUB_CACHE=data/raw/ALL $(VENV)/bin/python src/download_dataset.py
 
 # Run tests
 test:
-	$(PYTHON) -m unittest discover -s tests
+	$(VENV)/bin/python -m unittest discover -s tests
 
 # Lint
 lint:
-	flake8 .
+	$(VENV)/bin/python -m flake8 .
 
 # Format
 format:
-	black .
+	$(VENV)/bin/python -m black .
 
-# Clean up cache/pyc files
+# Clean up
 clean:
 	find . -type f -name "*.pyc" -delete
 	find . -type d -name "__pycache__" -exec rm -r {} +
 
-.PHONY: all install run test lint format clean
+.PHONY: all install test lint format clean
