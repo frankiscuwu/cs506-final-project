@@ -13,7 +13,7 @@ $(VENV)/bin/python:
 # Install dependencies and download dataset
 install: $(VENV)/bin/python requirements.txt
 	$(VENV)/bin/python -m pip install -r requirements.txt
-	KAGGLEHUB_CACHE=data/raw/ALL $(VENV)/bin/python src/download_dataset.py
+	KAGGLEHUB_CACHE=data/raw $(VENV)/bin/python src/download_dataset.py
 
 # Run tests
 test:
