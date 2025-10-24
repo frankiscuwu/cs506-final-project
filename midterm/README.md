@@ -10,7 +10,7 @@ The images were already augmented and preprocessed in the dataset. The documenta
 ```
 from keras.preprocessing.image import ImageDataGenerator
 
-datagen = ImageDataGenerator(
+ImageDataGenerator(
     rotation_range=10,         
     width_shift_range=0.1,     
     height_shift_range=0.1,    
@@ -30,19 +30,38 @@ The augmentations include:
 
 The images were then processed to be consistent 512x512 pixels in size, with files renamed consistently.
 
-### Data split
+### Data split and model preparation
 
-Following our proposal, we split our data in the following way:
+We first assigned each category of Acute Lymphoblastic Leukemia (ALL) with an integer value:
+
+``` 
+{
+    benign: 0,
+    early pre-B: 1,
+    pre-B: 2,
+    pro-B: 3
+}
+```
+
+We then iterated through the dataset and tagged each image with the appropriate integer label.
+
+With every image labelled, we then randomly shuffled the images into different subsets following our proposal:
 
 - Training: 70% (3,500 images/class is 14,000 images total)
 - Validation: 15% (750 images/class is 3,000 images total) 
 - Testing: 15% (750 images/class is 3,000 images total)
 
+We put each subset into its own custom ```ALLDatasetSplit``` class that inherits from ```torch.utils.data.Dataset``` for future use. 
+
+Through these steps, the dataset is properly structured, labelled, and randomly distributed for model training and evaluation.
+
+To make the process more efficient and replicable, we utilized the ```torch.utils.data.DataLoader``` to specify batch sizing and minimize overfitting in the the training step.
+
 <!-- is this true in the new model? -->
-~~The 512px x 512px images had already been preprocessed. After splitting the data, we normalised and resized images to 128 x 128 prior to model training.~~
+~~The 512px x 512px images had already been preprocessed. After splitting the data, we normalized and resized images to 128 x 128 prior to model training.~~
 
 ## Data modeling methods
-We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classfies them into benign, early pre-B, pre-B and pro-B ALL sub-types.
+We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classifies them into benign, early pre-B, pre-B and pro-B ALL sub-types.
 
 CNN Architecture:
 - Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
