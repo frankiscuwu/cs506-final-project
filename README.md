@@ -90,3 +90,7 @@ Our testing strategy prioritizes medical diagnostic standards:
 - **Real-world Distribution**: Test set composition reflects actual clinical prevalence
 - **Clinical Validation**: Compare model predictions with expert pathologist annotations (if available)
 - **Computational Benchmarking**: Measure inference time and resource requirements for clinical deployment feasibility
+
+## Citations
+
+Obuli Sai Naren. (2022). Multi Cancer Dataset [Data set]. Kaggle. https://doi.org/10.34740/KAGGLE/DSV/3415848
