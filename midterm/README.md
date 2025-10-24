@@ -28,6 +28,32 @@ The images were then processed to be consistent 512x512 pixels in size, with fil
 
 ### Data split and model preparation
 
+#### ALL_classification_colab
+We used `tensorflow`'s `tensorflow.keras.utils.image_dataset_from_directory` to split the dataset into different subsets following our proposal:
+
+- Training: 70% (3,500 images/class is 14,000 images total)
+- Validation: 15% (750 images/class is 3,000 images total) 
+- Testing: 15% (750 images/class is 3,000 images total)
+
+We used the following parameters:
+
+```
+train_ds = tf.keras.utils.image_dataset_from_directory(
+    data_dir,
+    validation_split=0.3,  # 70% train TODO: SHOULDN"T THIS BE 0.7??
+    subset="training",
+    seed=123,
+    image_size=(128, 128),  # resize all images
+    batch_size=32
+)
+```
+
+where `data_dir` is the dataset, `validation_split` is how much of the data we wanted under the label `subset`, with a determined shuffle `seed`, with all images resized to 128 x 128 pixels, in batch sizes of 32.
+
+We then normalized all of the pixels in every image to be spread from $[0,1]$ instead of $[0,255]$ to improve convergence speed and ensure consistency among all features.
+
+#### ALL_classification_with_visualizations
+
 We first assigned each category of Acute Lymphoblastic Leukemia (ALL) with an integer value:
 
 ``` 
@@ -53,11 +79,25 @@ Through these steps, the dataset is properly structured, labelled, and randomly 
 
 To make the process more efficient and replicable, we utilized the `torch.utils.data.DataLoader` to specify batch sizing and minimize overfitting in the the training step.
 
-<!-- is this true in the new model? -->
-~~The 512px x 512px images had already been preprocessed. After splitting the data, we normalized and resized images to 128 x 128 prior to model training.~~
-
 ## Data modeling methods
-We developed a two Convolutional Neural Networks (CNN) for multi-class image classification using Torch, the second being the same as the first but with an additional dropout layer. The first model is labeled `ALLCNN1` and the second is labeled `ALLCNN2`.
+
+#### ALL_classification_colab
+We developed a model using `tensorflow`'s `tensorflow.keras.Sequential` model, with the following layers:
+
+CNN Architecture:
+1) Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
+2) MaxPooling2D (2×2): reduces spatial dimensions, retains key activations
+3) Conv2D (64 filters, 3×3, ReLU): captures higher-order texture and shape features
+4) MaxPooling2D (2×2): further down-samples feature maps
+5) Flatten: converts 3-D feature maps to a 1-D feature vector
+6) Dense (128 units, ReLU): learns global feature representations for classification
+7) Dense (4 units, Softmax): outputs class-probability distribution across the four ALL subtypes
+
+We use ReLU activations to introduce non-linearity and improve learning efficiency. The output layer results are passed through a softmax function during loss computation.
+
+
+#### ALL_classification_with_visualizations
+We developed two Convolutional Neural Networks (CNN) for multi-class image classification using Torch, the second being the same as the first but with an additional dropout layer. The first model is labeled `ALLCNN1` and the second is labeled `ALLCNN2`.
 
 `ALLCNN2` Architecture:
 
@@ -85,20 +125,13 @@ We implemented three helper functions to support training:
 
 - `train_model` — coordinates the full training process over multiple epochs.
 
-
-<!-- i believe this is the old model? -->
-~~We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classifies them into benign, early pre-B, pre-B and pro-B ALL sub-types.~~
-
-~~CNN Architecture:~~
-~~- Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features~~
-~~- MaxPooling2D (2×2): reduces spatial dimensions, retains key activations~~
-~~- Conv2D (64 filters, 3×3, ReLU): captures higher-order texture and shape features~~
-~~- MaxPooling2D (2×2): further down-samples feature maps~~
-~~- Flatten: converts 3-D feature maps to a 1-D feature vector~~
-~~- Dense (128 units, ReLU): learns global feature representations for classification~~
-~~- Dense (4 units, Softmax): outputs class-probability distribution across the four ALL subtypes~~
-
 ## Preliminary results
+
+#### ALL_classification_colab
+
+After 15 epochs of training, the model arrived at a final training accuracy of 0.9973, training loss of 0.0096, validation accuracy of 0.9531, and a validation loss of 0.1345.
+
+#### ALL_classification_with_visualizations
 
 After training both models on the dataset, we obtained the following test results:
 
@@ -111,6 +144,7 @@ This suggests that including a dropout might have caused underfitting. The simpl
 
 ## Preliminary visualizations
 
+### Feature maps
 To gain insight into how the CNN processes the ALL images, we visualized the feature maps after the first convolutional model. We implemented a visualization function that 
 
 1) Passes an input image through the first convolutional layer of the model in evaluation mode.
@@ -124,3 +158,9 @@ An example visualization is show in **Figure 1**, where each image corresponds t
 ![alt text](./vis1.png)
 **Figure 1**: A visualization of feature maps from the first convolutional layer for a sample input image.
 
+### Accuracy
+
+We plotted the training and validation accuracy over each epoch to see how much better the model gets over time in **Figure 2**.
+
+![alt text](./vis2.png)
+**Figure 2**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch.
