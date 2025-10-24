@@ -9,10 +9,10 @@ Following our proposal, we split our data in the following way:
 - Validation: 15% (750 images/class) 
 - Testing: 15% (750 images/class)
 
-The images had already been preprocessed. After splitting the data, we normalised the images prior to model training. 
+The 512px x 512px images had already been preprocessed. After splitting the data, we normalised and resized images to 128 x 128 prior to model training. 
 
 ## Data modeling methods
-We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classfies themm into benign, early pre-B, pre-B and pro-B ALL sub-types.
+We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classfies them into benign, early pre-B, pre-B and pro-B ALL sub-types.
 
 CNN Architecture:
 - Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
