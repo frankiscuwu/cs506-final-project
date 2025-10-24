@@ -1,11 +1,7 @@
 # Midterm Report (10/27)
 
-## Preliminary visualizations
-
-![alt text](./vis1.png)
-
 ## Data processing
-The images were already augmented and preprocessed in the dataset. The documentation of the dataset describes the augmentation step as using Keras's ``ImageDataGenerator`` with the following parameters:
+The images were already augmented and preprocessed in the dataset. The documentation of the dataset describes the augmentation step as using Keras's `ImageDataGenerator` with the following parameters:
 
 ```
 from keras.preprocessing.image import ImageDataGenerator
@@ -51,19 +47,19 @@ With every image labelled, we then randomly shuffled the images into different s
 - Validation: 15% (750 images/class is 3,000 images total) 
 - Testing: 15% (750 images/class is 3,000 images total)
 
-We put each subset into its own custom ```ALLDatasetSplit``` class that inherits from ```torch.utils.data.Dataset``` for future use. 
+We put each subset into its own custom`ALLDatasetSplit` class that inherits from `torch.utils.data.Dataset` for future use. 
 
 Through these steps, the dataset is properly structured, labelled, and randomly distributed for model training and evaluation.
 
-To make the process more efficient and replicable, we utilized the ```torch.utils.data.DataLoader``` to specify batch sizing and minimize overfitting in the the training step.
+To make the process more efficient and replicable, we utilized the `torch.utils.data.DataLoader` to specify batch sizing and minimize overfitting in the the training step.
 
 <!-- is this true in the new model? -->
 ~~The 512px x 512px images had already been preprocessed. After splitting the data, we normalized and resized images to 128 x 128 prior to model training.~~
 
 ## Data modeling methods
-We developed a two Convolutional Neural Networks (CNN) for multi-class image classification using Torch, the second being the same as the first but with an additional dropout layer
+We developed a two Convolutional Neural Networks (CNN) for multi-class image classification using Torch, the second being the same as the first but with an additional dropout layer. The first model is labeled `ALLCNN1` and the second is labeled `ALLCNN2`.
 
-Second CNN Architecture:
+`ALLCNN2` Architecture:
 
 1) Conv Layer 1: 3 input channels → 32 filters (3×3 kernel)
 
@@ -79,30 +75,52 @@ Second CNN Architecture:
 
 7) Fully Connected Layer 2 (Output): 128 input features → 4 output neurons (class logits)
 
-All convolutional and fully connected layers use ReLU activations to introduce non-linearity and improve learning efficiency.
+All convolutional and fully connected layers use ReLU activations to introduce non-linearity and improve learning efficiency. The output layer produces raw class scores (logits), which are later passed through a softmax function during loss computation.
 
-We then created some functions to train the model, including the ```train_epoch``` function, ```validate_epoch``` function, and ```train_model``` function.
+We implemented three helper functions to support training:
 
+- `train_epoch` — performs one training iteration over the dataset,
+
+- `validate_epoch` — evaluates performance on the validation set,
+
+- `train_model` — coordinates the full training process over multiple epochs.
 
 
 <!-- i believe this is the old model? -->
 ~~We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classifies them into benign, early pre-B, pre-B and pro-B ALL sub-types.~~
 
 ~~CNN Architecture:~~
-- Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
-- MaxPooling2D (2×2): reduces spatial dimensions, retains key activations
-- Conv2D (64 filters, 3×3, ReLU): captures higher-order texture and shape features
-- MaxPooling2D (2×2): further down-samples feature maps
-- Flatten: converts 3-D feature maps to a 1-D feature vector
-- Dense (128 units, ReLU): learns global feature representations for classification
-- Dense (4 units, Softmax): outputs class-probability distribution across the four ALL subtypes
+~~- Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features~~
+~~- MaxPooling2D (2×2): reduces spatial dimensions, retains key activations~~
+~~- Conv2D (64 filters, 3×3, ReLU): captures higher-order texture and shape features~~
+~~- MaxPooling2D (2×2): further down-samples feature maps~~
+~~- Flatten: converts 3-D feature maps to a 1-D feature vector~~
+~~- Dense (128 units, ReLU): learns global feature representations for classification~~
+~~- Dense (4 units, Softmax): outputs class-probability distribution across the four ALL subtypes~~
 
 ## Preliminary results
 
-Our training
+After training both models on the dataset, we obtained the following test results:
 
+| Model | Test Accuracy | Test Loss
+| --- | --- | --- |
+| `ALLCNN1` | 95.30% | 0.1608 |
+| `ALLCNN2` | 90.17% | 0.4016 |
 
--   Preliminary visualizations of data.
--   Detailed description of data processing done so far.
--   Detailed description of data modeling methods used so far.
--   Preliminary results. (e.g. we fit a linear model to the data and we achieve promising results, or we did some clustering and we notice a clear pattern in the data)
+This suggests that including a dropout might have caused underfitting. The simpler architecture of `ALLCNN1` generalized better for this dataset, suggesting that the existing data diversity already mitigates overfitting.
+
+## Preliminary visualizations
+
+To gain insight into how the CNN processes the ALL images, we visualized the feature maps after the first convolutional model. We implemented a visualization function that 
+
+1) Passes an input image through the first convolutional layer of the model in evaluation mode.
+
+2) Extracts and normalizes the resulting feature maps.
+
+3) Displays a grid of the first 32 feature maps using grayscale intensity to represent activation strength.
+
+An example visualization is show in **Figure 1**, where each image corresponds to one feature map learned by the first convolutional layer. These maps typically capture low-level features such as edges, textures, and color gradients — foundational elements that deeper layers later combine into more complex patterns.
+
+![alt text](./vis1.png)
+**Figure 1**: A visualization of feature maps from the first convolutional layer for a sample input image.
+
