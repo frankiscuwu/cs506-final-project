@@ -61,9 +61,34 @@ To make the process more efficient and replicable, we utilized the ```torch.util
 ~~The 512px x 512px images had already been preprocessed. After splitting the data, we normalized and resized images to 128 x 128 prior to model training.~~
 
 ## Data modeling methods
-We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classifies them into benign, early pre-B, pre-B and pro-B ALL sub-types.
+We developed a two Convolutional Neural Networks (CNN) for multi-class image classification using Torch, the second being the same as the first but with an additional dropout layer
 
-CNN Architecture:
+Second CNN Architecture:
+
+1) Conv Layer 1: 3 input channels → 32 filters (3×3 kernel)
+
+2) Conv Layer 2: 32 input channels → 64 filters (3×3 kernel)
+
+3) Max Pooling: 2×2 pooling reduces spatial dimensions
+
+4) Dropout (p=0.25): Regularizes the network and mitigates overfitting (omit this layer in our first model)
+
+5) Flatten Layer: Converts feature maps to a 1D vector
+
+6) Fully Connected Layer 1: 64 × 62 × 62 input features → 128 hidden units with ReLU activation
+
+7) Fully Connected Layer 2 (Output): 128 input features → 4 output neurons (class logits)
+
+All convolutional and fully connected layers use ReLU activations to introduce non-linearity and improve learning efficiency.
+
+We then created some functions to train the model, including the ```train_epoch``` function, ```validate_epoch``` function, and ```train_model``` function.
+
+
+
+<!-- i believe this is the old model? -->
+~~We developed a Convolutional Neural Network (CNN) for multi-class image classification using TensorFlow/Keras. The CNN takes the 128×128×3 RGB images (normalized to [0, 1] intensity range) and classifies them into benign, early pre-B, pre-B and pro-B ALL sub-types.~~
+
+~~CNN Architecture:~~
 - Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
 - MaxPooling2D (2×2): reduces spatial dimensions, retains key activations
 - Conv2D (64 filters, 3×3, ReLU): captures higher-order texture and shape features
@@ -74,6 +99,7 @@ CNN Architecture:
 
 ## Preliminary results
 
+Our training
 
 
 -   Preliminary visualizations of data.
