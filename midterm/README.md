@@ -130,7 +130,14 @@ We implemented three helper functions to support training:
 
 #### TensorFlow:
 
-After 15 epochs of training, the model arrived at a final training accuracy of 0.9973, training loss of 0.0096, validation accuracy of 0.9531, and a validation loss of 0.1345.
+After training both models on the dataset, we obtained the following test results:
+
+| Model    | Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
+| -------- | ----------------- | ------------- | ------------------- | --------------- |
+| `model1` | 99.69%            | 1.17%         | 92.55%              | 24.29%          |
+| `model2` | 98.36%            | 5.68%         | 94.28%              | 16.93%          |
+
+This suggests that including a dropout might have caused underfitting. The simpler architecture of `model1` generalized better for this dataset, suggesting that the existing data diversity already mitigates overfitting.
 
 #### PyTorch:
 
@@ -155,24 +162,29 @@ To gain insight into how the CNN processes the ALL images, we visualized the fea
 
 3. Displays a grid of the first 32 feature maps using grayscale intensity to represent activation strength.
 
-An example visualization is show in **Figure 1**, where each image corresponds to one feature map learned by the first convolutional layer from the `PyTorch` models. These maps typically capture low-level features such as edges, textures, and color gradients — foundational elements that deeper layers later combine into more complex patterns.
+An example visualization is shown in **Figure 1**, where each image corresponds to one feature map learned by the first convolutional layer from the `PyTorch` models. These maps typically capture low-level features such as edges, textures, and color gradients — foundational elements that deeper layers later combine into more complex patterns.
+
+Another example visualization is shown in **Figure 2**, except from the `TensorFlow` models.
 
 ![alt text](./vis1.png)
 **Figure 1**: A visualization of feature maps from the first convolutional layer for a sample input image, from the `PyTorch` models.
 
+![alt text](./vis5.png)
+**Figure 2**: A visualization of feature maps from the first convolutional layer for a sample input image, from the `TensorFlow` models.
+
 ### Accuracy
 
-We plotted the training and validation accuracy over each epoch to see how much better the model gets over time in **Figure 2** using the model from the `TensorFlow` package.
+We plotted the training and validation accuracy over each epoch to see how much better the model gets over time in **Figure 3** and **Figure 4** using the models from the `TensorFlow` package.
 
 ![alt text](./vis2.png)
-**Figure 2**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model1` under `TensorFlow`.
+**Figure 3**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model1` under `TensorFlow`.
 
 ![alt text](./vis3.png)
-**Figure 3**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model2` under `TensorFlow`.
+**Figure 4**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model2` under `TensorFlow`.
 
 ### Confusion Matrix
 
-To see where our model struggled with classification, we generated a confusion matrix on the `TensorFlow` version of our model, pictured in **Figure 3**.
+To see where our model struggled with classification, we generated a confusion matrix on the `TensorFlow` version of our model, pictured in **Figure 5**.
 
 ![alt text](./vis4.png)
-**Figure 3**: Confusion matrices for `TensorFlow` CNN models, where `0` is benign, `1` is early pre-b, `2` is pre-b, and `3` is pro-b.
+**Figure 5**: Confusion matrices for `TensorFlow` CNN models, where `0` is benign, `1` is early pre-b, `2` is pre-b, and `3` is pro-b.
