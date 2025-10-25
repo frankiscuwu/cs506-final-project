@@ -1,5 +1,7 @@
 # Midterm Report (10/27)
 
+We utilized two different machine learning packages to develop the same model: one using imports from `TensorFlow` and one from `PyTorch`. This report labels which package was utilized for the corresponding analysis in each section.
+
 ## Data processing
 The images were already augmented and preprocessed in the dataset. The documentation of the dataset describes the augmentation step as using Keras's `ImageDataGenerator` with the following parameters:
 
@@ -28,8 +30,8 @@ The images were then processed to be consistent 512x512 pixels in size, with fil
 
 ### Data split and model preparation
 
-#### ALL_classification_colab
-We used `tensorflow`'s `tensorflow.keras.utils.image_dataset_from_directory` to split the dataset into different subsets following our proposal:
+#### TensorFlow:
+We used `TensorFlow`'s `tensorflow.keras.utils.image_dataset_from_directory` to split the dataset into different subsets following our proposal:
 
 - Training: 70% (3,500 images/class is 14,000 images total)
 - Validation: 15% (750 images/class is 3,000 images total) 
@@ -52,7 +54,7 @@ where `data_dir` is the dataset, `validation_split` is how much of the data we w
 
 We then normalized all of the pixels in every image to be spread from $[0,1]$ instead of $[0,255]$ to improve convergence speed and ensure consistency among all features.
 
-#### ALL_classification_with_visualizations
+#### PyTorch:
 
 We first assigned each category of Acute Lymphoblastic Leukemia (ALL) with an integer value:
 
@@ -81,8 +83,8 @@ To make the process more efficient and replicable, we utilized the `torch.utils.
 
 ## Data modeling methods
 
-#### ALL_classification_colab
-We developed a model using `tensorflow`'s `tensorflow.keras.Sequential` model, with the following layers:
+#### TensorFlow:
+We developed a model using `TensorFlow`'s `tensorflow.keras.Sequential` model, with the following layers:
 
 CNN Architecture:
 1) Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
@@ -96,7 +98,7 @@ CNN Architecture:
 We use ReLU activations to introduce non-linearity and improve learning efficiency. The output layer results are passed through a softmax function during loss computation.
 
 
-#### ALL_classification_with_visualizations
+#### PyTorch:
 We developed two Convolutional Neural Networks (CNN) for multi-class image classification using Torch, the second being the same as the first but with an additional dropout layer. The first model is labeled `ALLCNN1` and the second is labeled `ALLCNN2`.
 
 `ALLCNN2` Architecture:
@@ -127,11 +129,11 @@ We implemented three helper functions to support training:
 
 ## Preliminary results
 
-#### ALL_classification_colab
+#### TensorFlow:
 
 After 15 epochs of training, the model arrived at a final training accuracy of 0.9973, training loss of 0.0096, validation accuracy of 0.9531, and a validation loss of 0.1345.
 
-#### ALL_classification_with_visualizations
+#### PyTorch:
 
 After training both models on the dataset, we obtained the following test results:
 
