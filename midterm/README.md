@@ -134,8 +134,8 @@ After training both models on the dataset, we obtained the following test result
 
 | Model    | Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
 | -------- | ----------------- | ------------- | ------------------- | --------------- |
-| `model1` | 99.69%            | 1.17%         | 92.55%              | 24.29%          |
-| `model2` | 98.36%            | 5.68%         | 94.28%              | 16.93%          |
+| `model1` | 99.38%            | 0.0199        | 96.81%              | 0.1201          |
+| `model2` | 98.36%            | 0.0568        | 94.28%              | 0.1693          |
 
 This suggests that including a dropout might have caused underfitting. The simpler architecture of `model1` generalized better for this dataset, suggesting that the existing data diversity already mitigates overfitting.
 
@@ -143,10 +143,10 @@ This suggests that including a dropout might have caused underfitting. The simpl
 
 After training both models on the dataset, we obtained the following test results:
 
-| Model     | Test Accuracy | Test Loss |
-| --------- | ------------- | --------- |
-| `ALLCNN1` | 95.30%        | 0.1608    |
-| `ALLCNN2` | 90.17%        | 0.4016    |
+| Model     | Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
+| --------- | ----------------- | ------------- | ------------------- | --------------- |
+| `ALLCNN1` | 96.54%            | 0.0954        | 94.77%              | 0.1400          |
+| `ALLCNN2` | 95.04%            | 0.1413        | 90.70%              | 0.2346          |
 
 This suggests that including a dropout might have caused underfitting. The simpler architecture of `ALLCNN1` generalized better for this dataset, suggesting that the existing data diversity already mitigates overfitting.
 
