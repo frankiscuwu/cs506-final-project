@@ -40,7 +40,7 @@ We used the following parameters:
 ```
 train_ds = tf.keras.utils.image_dataset_from_directory(
     data_dir,
-    validation_split=0.3,  # 70% train TODO: SHOULDN"T THIS BE 0.7??
+    validation_split=0.3,  # 70% train
     subset="training",
     seed=123,
     image_size=(128, 128),  # resize all images
