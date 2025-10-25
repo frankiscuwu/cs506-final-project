@@ -71,7 +71,7 @@ We first assigned each category of Acute Lymphoblastic Leukemia (ALL) with an in
 }
 ```
 
-We then iterated through the dataset and tagged each image with the appropriate integer label.
+We then iterated through the dataset and tagged each image with the appropriate integer label, while resizing the images to 128 x 128 pixels.
 
 With every image labelled, we then randomly shuffled the images into different subsets following our proposal:
 
