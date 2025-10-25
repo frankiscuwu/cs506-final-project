@@ -1,5 +1,11 @@
 # Midterm Report (10/27)
 
+## Presentation Link
+
+https://youtu.be/bUUgzfF8DWI?si=TKF-KiE3FyJZANpW
+
+## Disclaimer
+
 We utilized two different machine learning packages to develop the same model: one using imports from `TensorFlow` and one from `PyTorch`. This report labels which package was utilized for the corresponding analysis in each section.
 
 ## Data processing
