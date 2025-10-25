@@ -158,18 +158,21 @@ To gain insight into how the CNN processes the ALL images, we visualized the fea
 An example visualization is show in **Figure 1**, where each image corresponds to one feature map learned by the first convolutional layer from the `PyTorch` models. These maps typically capture low-level features such as edges, textures, and color gradients — foundational elements that deeper layers later combine into more complex patterns.
 
 ![alt text](./vis1.png)
-**Figure 1**: A visualization of feature maps from the first convolutional layer for a sample input image.
+**Figure 1**: A visualization of feature maps from the first convolutional layer for a sample input image, from the `PyTorch` models.
 
 ### Accuracy
 
 We plotted the training and validation accuracy over each epoch to see how much better the model gets over time in **Figure 2** using the model from the `TensorFlow` package.
 
 ![alt text](./vis2.png)
-**Figure 2**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch.
+**Figure 2**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model1` under `TensorFlow`.
+
+![alt text](./vis3.png)
+**Figure 3**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model2` under `TensorFlow`.
 
 ### Confusion Matrix
 
 To see where our model struggled with classification, we generated a confusion matrix on the `TensorFlow` version of our model, pictured in **Figure 3**.
 
-![alt text](./vis3.png)
-**Figure 3**: Confusion matrices
+![alt text](./vis4.png)
+**Figure 3**: Confusion matrices for `TensorFlow` CNN models, where `0` is benign, `1` is early pre-b, `2` is pre-b, and `3` is pro-b.
