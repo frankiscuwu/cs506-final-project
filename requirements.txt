@@ -3,7 +3,5 @@ scikit-learn
 tensorflow
 kagglehub
 pandas
-torch
 matplotlib
 seaborn
-opencv-python-headless
