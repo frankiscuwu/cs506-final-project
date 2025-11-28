@@ -1,4 +1,4 @@
-# Final Report (12/6)
+# Final Report (12/10)
 
 - How to build and run the code (Include this first so we know how to reproduce your results). There should be a makefile that installs all dependencies and builds the code. This is the most important part.
 - Include test code and a GitHub workflow that runs the test code. Just test a few things you think are important - no need to overdo it on the testing front, since that’s not the focus of the project.
