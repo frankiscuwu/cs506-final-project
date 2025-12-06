@@ -1,16 +1,19 @@
 # Final Report (12/10)
 
-- How to build and run the code (Include this first so we know how to reproduce your results). There should be a makefile that installs all dependencies and builds the code. This is the most important part.
 - Include test code and a GitHub workflow that runs the test code. Just test a few things you think are important - no need to overdo it on the testing front, since that’s not the focus of the project.
 - Visualizations of data (interactive visualizations are highly encouraged).
 - Description of data processing and modeling (what the code does).
 - Results showing that you achieved your goal.
 
-# Midterm Report (10/27)
-
 ## Presentation Link
 
-https://youtu.be/bUUgzfF8DWI?si=TKF-KiE3FyJZANpW
+## Local build instructions
+
+In the root directory, run `make`. You will be prompted to input your Kaggle username and a personal API Token. You can retrieve your username by going to `Your Profile` on the Kaggle website, and your API Token by going to `Settings` and navigating to `API Tokens`. Generate a new token, and paste the given token key into the prompt.
+
+Thus, `make` will automatically create a `venv` with the required packages, download the dataset, and start preprocessing and running the model, before creating the visualizations.
+
+
 
 ## Disclaimer
 
