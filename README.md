@@ -143,10 +143,10 @@ We plotted the training and validation accuracy over each epoch to see how much 
 
 ### UMAP Visualization
 
-We created a UMAP visualization of the model's classifications. Comparing this with the dataset's UMAP, we can see how well it performs: extending the distances and separating the overlaps -- shown in **Figure 8**.
+We created a UMAP visualization of Model 3's features to compare our model to the pretrained model -- shown in **Figure 8**. Comparing this with the preliminary UMAP, we can see how well it performs: extending the distances between clusters and separating many of the overlaps present in the original UMAP. Similar to the preliminary UMAP, there is some overlap between the benign and early Pre-B cases, but it is much smaller in our model's UMAP feature space.
 
 ![alt text](./final/vis13.png)
-**Figure 8**: UMAP of the model's classifications.
+**Figure 8**: UMAP visualisation of Model 3 features on subset of training data.
 
 ### Confusion Matrix
 
