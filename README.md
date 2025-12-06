@@ -103,6 +103,13 @@ To the untrained, naked human eye, it's nearly impossible to give a diagnosis pu
 ![alt text](./final/vis8.png)
 **Figure 1**: Random images from the dataset.
 
+### UMAP
+
+We made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 2**. We used a pre-trained ResNet-50 deep learning model to get a rough overview of how the data might be organized. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix for model 1. Additionally, Pre-B data points cluster closely to the benign and early Pre-B overlapping clusters, which aligns with the timeline of development of Pre-B ALL. Lastly, Pro-B has the most distinct grouping and is clustered far from the early Pre-B/Pre-B points which suggests a larger morphological difference between the two ALL subtypes.
+
+![alt text](./final/vis12.png)
+**Figure 2**: UMAP representation of training data using ResNet50 model.
+
 ### Feature maps
 
 To gain insight into how the CNN processes the ALL images, we visualized the feature maps after the first convolutional layer. We implemented a visualization function that
@@ -113,30 +120,23 @@ To gain insight into how the CNN processes the ALL images, we visualized the fea
 
 3. Displays a grid of the first 32 feature maps using grayscale intensity to represent activation strength.
 
-An example visualization is shown in **Figure 2**, where each image corresponds to one feature map learned by the first convolutional layer. These maps typically capture low-level features such as edges, textures, and color gradients — foundational elements that deeper layers later combine into more complex patterns.
+An example visualization is shown in **Figure 3**, where each image corresponds to one feature map learned by the first convolutional layer. These maps typically capture low-level features such as edges, textures, and color gradients — foundational elements that deeper layers later combine into more complex patterns.
 
 ![alt text](./midterm/vis5.png)
-**Figure 2**: A visualization of feature maps from the first convolutional layer for a sample input image.
+**Figure 3**: A visualization of feature maps from the first convolutional layer for a sample input image.
 
-We also made box plots of the brightnesses and contrasts of the images in the dataset, as they could be a possible feature picked up by the model -- shown in **Figure 3** and **Figure 4**.
+We also made box plots of the brightnesses and contrasts of the images in the dataset, as they could be a possible feature picked up by the model -- shown in **Figure 4** and **Figure 5**.
 
 ![alt text](./final/vis9.png)
-**Figure 3**: Box plots of the brightness of the images in each class.
+**Figure 4**: Box plots of the brightness of the images in each class.
 
 ![alt text](./final/vis10.png)
-**Figure 4**: Box plots of the contrast of the images in each class.
+**Figure 5**: Box plots of the contrast of the images in each class.
 
-We also sketched out edge maps, as the edges of shapes could also be picked up by the model -- shown in **Figure 5**.
+We also sketched out edge maps, as the edges of shapes could also be picked up by the model -- shown in **Figure 6**.
 
 ![alt text](./final/vis11.png)
-**Figure 5**: A sample of edge maps of one image from each class.
-
-### UMAP
-
-We made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 6**. We used a pre-trained ResNet-50 deep learning model to get a rough overview of how the data might be organized. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix for model 1. Additionally, Pre-B data points cluster closely to the benign and early Pre-B overlapping clusters, which aligns with the timeline of development of Pre-B ALL. Lastly, Pro-B has the most distinct grouping and is clustered far from the early Pre-B/Pre-B points which suggests a larger morphological difference between the two ALL subtypes.
-
-![alt text](./final/vis12.png)
-**Figure 6**: UMAP representation of training data using ResNet50 model.
+**Figure 6**: A sample of edge maps of one image from each class.
 
 ### Accuracy
 
