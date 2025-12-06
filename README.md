@@ -1,9 +1,5 @@
 # Final Report (12/10)
 
--   Visualizations of data (interactive visualizations are highly encouraged).
--   Description of data processing and modeling (what the code does).
--   Results showing that you achieved your goal.
-
 ## Presentation Link
 
 ## Local build instructions
@@ -77,7 +73,7 @@ Final CNN Architecture:
 3. MaxPooling2D (2×2): Reduces spatial resolution, keeps the most salient activations, and decreases computation.
 4. Dropout (p=0.25): Randomly drops 25% of neurons during training to reduce overfitting and improve generalization.
 5. Conv2D (128 filters, 3×3, ReLU): Extracts higher-level, class-specific features such as cell texture patterns characteristic of ALL subtypes.
-6. Conv2D (128 filters, 3×3, ReLU): Further refines and deepens the feature hierarchy, enabling detection of subtle differences between similar classes.
+6. Conv2D (256 filters, 3×3, ReLU): Further refines and deepens the feature hierarchy, enabling detection of subtle differences between similar classes.
 7. MaxPooling2D (2×2): Performs another spatial downsampling step, reducing dimensionality while preserving the strongest activations.
 8. Dropout (p=0.25): Provides a second regularization stage to prevent co-adaptation of deep features and reduce overfitting.
 9. GlobalAveragePooling2D: Converts each feature map into a single value by averaging spatial dimensions — drastically reduces parameters and improves model robustness compared to a Flatten layer.
@@ -92,7 +88,7 @@ After training the final model on the dataset, we obtained the following test re
 
 | Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
 | ----------------- | ------------- | ------------------- | --------------- |
-| 99.96%            | 0.0306        | 97.14%              | 0.00861         |
+| 99.96%            | 0.0306        | 97.14%              | 0.0861          |
 
 ## Visualizations
 
@@ -151,3 +147,7 @@ To see where our model struggled with classification, we generated a confusion m
 
 ![alt text](./final/vis7.png)
 **Figure 8**: Confusion matrix for the final model.
+
+## Results
+
+With a final validation accuracy of 97.14%, this new model has the best training performance. The model generalizes well as its testing performance is very similar as seen in **Figure 8**. Compared to the other previously built models 1 and 2, model 3 is able to more clearly distinguish the difference between the benign and early classes. Ultimately, this makes us confident that we met our original goal of creating an image classification model that can identify ALL diagnoses between benign, early pre-b, pre-b, and pro-b.
