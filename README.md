@@ -98,7 +98,7 @@ After training the final model on the dataset, we obtained the following test re
 
 ### Dataset
 
-To the naked, human eye, it's nearly impossible to give a diagnosis purely from the images. **Figure 1** demonstrates random samples from the 4 classes.
+To the untrained, naked human eye, it's nearly impossible to give a diagnosis purely from the images. **Figure 1** demonstrates random samples from the 4 classes.
 
 ![alt text](./final/vis8.png)
 **Figure 1**: Random images from the dataset.
