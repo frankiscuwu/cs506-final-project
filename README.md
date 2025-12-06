@@ -88,7 +88,7 @@ We use ReLU activations to introduce non-linearity and improve learning efficien
 
 ## Preliminary results
 
-After training both models on the dataset, we obtained the following test results:
+After training the final model on the dataset, we obtained the following test results:
 
 | Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
 | ----------------- | ------------- | ------------------- | --------------- |
@@ -96,9 +96,16 @@ After training both models on the dataset, we obtained the following test result
 
 ## Visualizations
 
+### Dataset
+
+To the naked, human eye, it's nearly impossible to give a diagnosis purely from the images. **Figure 1** demonstrates random samples from the 4 classes.
+
+![alt text](./final/vis8.png)
+**Figure 1**: Random images from the dataset.
+
 ### Feature maps
 
-To gain insight into how the CNN processes the ALL images, we visualized the feature maps after the first convolutional model. We implemented a visualization function that
+To gain insight into how the CNN processes the ALL images, we visualized the feature maps after the first convolutional layer. We implemented a visualization function that
 
 1. Passes an input image through the first convolutional layer of the model in evaluation mode.
 
@@ -111,19 +118,36 @@ An example visualization is shown in **Figure 2**, where each image corresponds 
 ![alt text](./midterm/vis5.png)
 **Figure 2**: A visualization of feature maps from the first convolutional layer for a sample input image.
 
+We also made box plots of the brightnesses and contrasts of the images in the dataset, as they could be a possible feature picked up by the model -- shown in **Figure 3** and **Figure 4**.
+
+![alt text](./final/vis9.png)
+**Figure 3**: Box plots of the brightness of the images in each class.
+
+![alt text](./final/vis10.png)
+**Figure 4**: Box plots of the contrast of the images in each class.
+
+We also sketched out edge maps, as the edges of shapes could also be picked up by the model -- shown in **Figure 5**.
+
+![alt text](./final/vis11.png)
+**Figure 5**: A sample of edge maps of one image from each class.
+
+### UMAP
+
+We made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 6**. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix.
+
+![alt text](./final/vis12.png)
+**Figure 6**: UMAP representation of training data using ResNet50 model.
+
 ### Accuracy
 
-We plotted the training and validation accuracy over each epoch to see how much better the model gets over time in **Figure 3** and **Figure 4**.
+We plotted the training and validation accuracy over each epoch to see how much better the model gets over time in **Figure 7**.
 
-![alt text](./midterm/vis2.png)
-**Figure 3**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model1`.
-
-![alt text](./midterm/vis3.png)
-**Figure 4**: A graph of accuracy against epoch, identifying the training accuracy and validation accuracy over each epoch for `model2`.
+![alt text](./final/vis6.png)
+**Figure 7**: A visualization of the final model's training and validation accuracy over each epoch.
 
 ### Confusion Matrix
 
-To see where our model struggled with classification, we generated a confusion matrix of our model, pictured in **Figure 5**.
+To see where our model struggled with classification, we generated a confusion matrix of our model, pictured in **Figure 8**. Note the biggest confusion is present between benign and early.
 
-![alt text](./midterm/vis4.png)
-**Figure 5**: Confusion matrices for our model, where `0` is benign, `1` is early pre-b, `2` is pre-b, and `3` is pro-b.
+![alt text](./final/vis7.png)
+**Figure 8**: Confusion matrix for the final model.
