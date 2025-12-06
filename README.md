@@ -1,12 +1,10 @@
 # Final Report (12/10)
 
-- Visualizations of data (interactive visualizations are highly encouraged).
-- Description of data processing and modeling (what the code does).
-- Results showing that you achieved your goal.
+-   Visualizations of data (interactive visualizations are highly encouraged).
+-   Description of data processing and modeling (what the code does).
+-   Results showing that you achieved your goal.
 
 ## Presentation Link
-
-
 
 ## Local build instructions
 
@@ -70,32 +68,33 @@ We then normalized all of the pixels in every image to be spread from $[0,1]$ in
 
 ## Data modeling methods
 
-We developed two Convolutional Neural Networks (CNN) using `TensorFlow`'s `tensorflow.keras.Sequential` model, the second being the same as the first but with an additional dropout layer. The first model is labeled `model1` and the second is labeled `model2`
+We developed three Convolutional Neural Networks (CNN) using `TensorFlow`'s `tensorflow.keras.Sequential` model, with each model performing better than the last. The first model had 2 convolution layers and a max pooling layer. The second added a 25% dropout layer. The third and final added more of each layer for a final total of 4 convolution layers, 2 max pooling layers and 2 25% dropout layers.
 
-CNN Architecture:
+Final CNN Architecture:
 
-1. Conv2D (32 filters, 3×3, ReLU): learns low-level spatial features
-2. Conv2D (64 filters, 3×3, ReLU): captures higher-order texture and shape features
-3. MaxPooling2D (2×2): reduces spatial dimensions, retains key activations
-4. Dropout (p=0.25): Regularizes the network and mitigates overfitting (omit this layer in our first model)4. Flatten: converts 3-D feature maps to a 1-D feature vector
-5. Dense (128 units, ReLU): learns global feature representations for classification
-6. Dense (4 units, Softmax): outputs class-probability distribution across the four ALL subtypes
+1. Conv2D (32 filters, 3×3, ReLU): Learns low-level spatial features such as edges, corners, and basic color/texture patterns.
+2. Conv2D (64 filters, 3×3, ReLU): Captures more complex features by combining earlier low-level patterns into shapes and curves.
+3. MaxPooling2D (2×2): Reduces spatial resolution, keeps the most salient activations, and decreases computation.
+4. Dropout (p=0.25): Randomly drops 25% of neurons during training to reduce overfitting and improve generalization.
+5. Conv2D (128 filters, 3×3, ReLU): Extracts higher-level, class-specific features such as cell texture patterns characteristic of ALL subtypes.
+6. Conv2D (128 filters, 3×3, ReLU): Further refines and deepens the feature hierarchy, enabling detection of subtle differences between similar classes.
+7. MaxPooling2D (2×2): Performs another spatial downsampling step, reducing dimensionality while preserving the strongest activations.
+8. Dropout (p=0.25): Provides a second regularization stage to prevent co-adaptation of deep features and reduce overfitting.
+9. GlobalAveragePooling2D: Converts each feature map into a single value by averaging spatial dimensions — drastically reduces parameters and improves model robustness compared to a Flatten layer.
+10. Dense (128 units, ReLU): Learns compact, high-level representations from the global features to separate the four ALL subtypes.
+11. Dense (4 units, Softmax): Produces a probability distribution over the 4 final classes.
 
 We use ReLU activations to introduce non-linearity and improve learning efficiency. The output layer results are passed through a softmax function during loss computation.
-
 
 ## Preliminary results
 
 After training both models on the dataset, we obtained the following test results:
 
-| Model    | Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
-| -------- | ----------------- | ------------- | ------------------- | --------------- |
-| `model1` | 99.38%            | 0.0199        | 96.81%              | 0.1201          |
-| `model2` | 98.36%            | 0.0568        | 94.28%              | 0.1693          |
+| Training Accuracy | Training Loss | Validation Accuracy | Validation Loss |
+| ----------------- | ------------- | ------------------- | --------------- |
+| 99.96%            | 0.0306        | 97.14%              | 0.00861         |
 
-This suggests that including a dropout might have caused underfitting. The simpler architecture of `model1` generalized better for this dataset, suggesting that the existing data diversity already mitigates overfitting.
-
-## Preliminary visualizations
+## Visualizations
 
 ### Feature maps
 
