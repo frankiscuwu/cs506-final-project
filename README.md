@@ -2,6 +2,8 @@
 
 ## Presentation Link
 
+https://youtu.be/VektY52lp_w
+
 ## Local build instructions
 
 In the root directory, run `make`. You will be prompted to input your Kaggle username and a personal API Token. You can retrieve your username by going to `Your Profile` on the Kaggle website, and your API Token by going to `Settings` and navigating to `API Tokens`. Generate a new token, and paste the given token key into the prompt.
@@ -99,9 +101,7 @@ To the untrained, naked human eye, it's nearly impossible to give a diagnosis pu
 ![alt text](./final/vis8.png)
 **Figure 1**: Random images from the dataset.
 
-### UMAP
-
-We made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 2**. We used a pre-trained ResNet-50 deep learning model to get a rough overview of how the data might be organized. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix for model 1. Additionally, Pre-B data points cluster closely to the benign and early Pre-B overlapping clusters, which aligns with the timeline of development of Pre-B ALL. Lastly, Pro-B has the most distinct grouping and is clustered far from the early Pre-B/Pre-B points which suggests a larger morphological difference between the two ALL subtypes.
+We also made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 2**. We used a pre-trained ResNet-50 deep learning model to get a rough overview of how the data might be organized. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix for model 1. Additionally, Pre-B data points cluster closely to the benign and early Pre-B overlapping clusters, which aligns with the timeline of development of Pre-B ALL. Lastly, Pro-B has the most distinct grouping and is clustered far from the early Pre-B/Pre-B points which suggests a larger morphological difference between the two ALL subtypes.
 
 ![alt text](./final/vis12.png)
 **Figure 2**: UMAP representation of training data using ResNet50 model.
@@ -141,13 +141,20 @@ We plotted the training and validation accuracy over each epoch to see how much 
 ![alt text](./final/vis6.png)
 **Figure 7**: A visualization of the final model's training and validation accuracy over each epoch.
 
+### UMAP Visualization
+
+We created a UMAP visualization of the model's classifications. Comparing this with the dataset's UMAP, we can see how well it performs: extending the distances and separating the overlaps -- shown in **Figure 8**.
+
+![alt text](./final/vis13.png)
+**Figure 8**: UMAP of the model's classifications.
+
 ### Confusion Matrix
 
-To see where our model struggled with classification, we generated a confusion matrix of our model, pictured in **Figure 8**. Note the biggest confusion is present between benign and early.
+To see where our model struggled with classification, we generated a confusion matrix of our model, pictured in **Figure 9**. Note the biggest confusion is present between benign and early.
 
 ![alt text](./final/vis7.png)
-**Figure 8**: Confusion matrix for the final model.
+**Figure 9**: Confusion matrix for the final model.
 
 ## Results
 
-With a final validation accuracy of 97.14%, this new model has the best training performance. The model generalizes well as its testing performance is very similar as seen in **Figure 8**. Compared to the other previously built models 1 and 2, model 3 is able to more clearly distinguish the difference between the benign and early classes. Ultimately, this makes us confident that we met our original goal of creating an image classification model that can identify ALL diagnoses between benign, early pre-b, pre-b, and pro-b.
+With a final validation accuracy of 97.14%, this new model has the best training performance. The model generalizes well as its testing performance is very similar as seen in **Figure 7**. Compared to the other previously built models 1 and 2, model 3 is able to more clearly distinguish the difference between the benign and early classes. Ultimately, this makes us confident that we met our original goal of creating an image classification model that can identify ALL diagnoses between benign, early pre-b, pre-b, and pro-b.
