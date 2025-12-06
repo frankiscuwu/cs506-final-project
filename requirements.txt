@@ -5,3 +5,5 @@ kagglehub
 pandas
 matplotlib
 seaborn
+plotly
+ipykernel

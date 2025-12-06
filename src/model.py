@@ -31,3 +31,8 @@ def build_and_train_model(train_ds: tf.data.Dataset, val_ds: tf.data.Dataset) ->
     early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=4)
 
     history3 = model3.fit(train_ds, validation_data=val_ds, epochs=epochs, callbacks=[early_stopping])
+    
+    model3.save("saved_model.keras")
+    print("Model saved to ./saved_model.keras")
+    
+    return model3, history3

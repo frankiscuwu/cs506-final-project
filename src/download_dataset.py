@@ -3,6 +3,9 @@ import shutil
 import kagglehub
 
 def download_dataset():
+    if os.path.exists("data/raw"):
+        return
+    
     kagglehub.login()
 
     path = kagglehub.dataset_download("frankiscoo/all-subset")
