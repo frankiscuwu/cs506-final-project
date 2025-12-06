@@ -133,7 +133,7 @@ We also sketched out edge maps, as the edges of shapes could also be picked up b
 
 ### UMAP
 
-We made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 6**. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix.
+We made a UMAP visualization of the training data to visualize the distinctiveness between each class -- shown in **Figure 6**. We used a pre-trained ResNet-50 deep learning model to get a rough overview of how the data might be organized. Looking at it, we can see that benign and early pre-b overlap, which logically makes sense for the disease, and explains the later confusion matrix for model 1. Additionally, Pre-B data points cluster closely to the benign and early Pre-B overlapping clusters, which aligns with the timeline of development of Pre-B ALL. Lastly, Pro-B has the most distinct grouping and is clustered far from the early Pre-B/Pre-B points which suggests a larger morphological difference between the two ALL subtypes.
 
 ![alt text](./final/vis12.png)
 **Figure 6**: UMAP representation of training data using ResNet50 model.
