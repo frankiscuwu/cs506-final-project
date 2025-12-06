@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 num_classes = 4  # benign, early, pre, pro
-epochs = 15
+epochs = 50
 IMG_SIZE = (128, 128)
 
 def build_and_train_model(train_ds: tf.data.Dataset, val_ds: tf.data.Dataset) -> None:
