@@ -2,7 +2,9 @@
 
 ## Presentation Link
 
-https://youtu.be/VektY52lp_w
+Video: https://youtu.be/VektY52lp_w
+
+Slides: https://docs.google.com/presentation/d/17uTSXGM-D5xyq9DqUmYNPAbyIlZV5RZhFovNATh8zjA/edit?usp=sharing 
 
 ## Local build instructions
 
